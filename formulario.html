@@ -77,52 +77,52 @@
             }
 
 
-            function verificaDados(event) {
+            function verificaDatos(event) {
                 campo_nombre.value = campo_nombre.value.trim();
                 if (campo_matricula.value == "" || campo_nombre.value == "" || campo_año.value == "") {
                     alert("Datos invalidos, intente nuevamente.");
                 }
                 else{
-                    armazenarDados(event);
+                    almacenarDatos(event);
                 }
             }
 
-            function armazenarDados(event) {
+            function almacenarDatos(event) {
                 event.preventDefault();
                 //Adiciona ou modifica um aluno de ListaAlunos
                 if (idRegistro == 0) {
                     alumnos += 1;
-                    ListaAlumnos.Alumnos.push({matricula: campo_matricula.value, nombre: campo_nome.value, ano: campo_ano.value, id: alunosSeq});
+                    ListaAlumnos.Alumnos.push({matricula: campo_matricula.value, nombre: campo_nombre.value, año: campo_año.value, id: alumnos});
                 }
                 else{
-                    ListaAlunos.Alunos.forEach(e => {
+                    ListaAlumnos.Alumnos.forEach(e => {
                         if (e.id == idAcao){
-                            var indice = ListaAlunos.Alunos.indexOf(e);
-                            ListaAlunos.Alunos.splice(indice, 1, {matricula: campo_matricula.value, nome: campo_nome.value, ano: campo_ano.value, id: idAcao});
+                            var indice = ListaAlumnos.Alumnos.indexOf(e);
+                            ListaAlumnos.Alumnos.splice(indice, 1, {matricula: campo_matricula.value, nombre: campo_nombre.value, año: campo_año.value, id: idRegistro});
                         }
                     });
                 }
-                myJSON = JSON.stringify(ListaAlunos);
-                localStorage.setItem("ListaAlunos", myJSON);
-                localStorage.setItem("alunosSeq", alunosSeq);
+                myJSON = JSON.stringify(ListaAlumnos);
+                localStorage.setItem("ListaAlumnos", myJSON);
+                localStorage.setItem("alumnos", alunosSeq);
                 window.location.assign("index.html");
             }
 
             function preencheCamposEditar() {                
                     if (idAcao != 0) {
                         var valorMatricula;
-                        var valorNome;
-                        var valorAno;
-                        ListaAlunos.Alunos.forEach(e => {
-                            if (e.id == idAcao){
+                        var valorNombre;
+                        var valorAño;
+                        ListaAlumnos.Alumnos.forEach(e => {
+                            if (e.id == idRegistro){
                                 valorMatricula = e.matricula;
-                                valorNome = e.nome;
-                                valorAno = e.ano;
+                                valorNombre = e.nombre;
+                                valorAño = e.año;
                             }
                         });
                         campo_matricula.setAttribute("value", valorMatricula);
-                        campo_nome.setAttribute("value", valorNome);
-                        campo_ano.setAttribute("value", valorAno);
+                        campo_nombre.setAttribute("value", valorNombre);
+                        campo_año.setAttribute("value", valorAño);
                 }
             }
 
@@ -130,12 +130,12 @@
 
             window.onload = preencheCamposEditar();
 
-            campo_ano.onkeypress = apenasNumeros;
+            campo_año.onkeypress = apenasNumeros;
             campo_matricula.onkeypress = apenasNumeros;
-            campo_nome.onkeypress = apenasChar;
+            campo_nombre.onkeypress = apenasChar;
 
 
-            botao_confirmar.addEventListener("click", verificaDados);
+            botao_confirmar.addEventListener("click", verificaDatos);
             botao_cancelar.addEventListener("click", function(){
                 window.location.assign("index.html");
             });

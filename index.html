@@ -4,25 +4,25 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/estilo_index.css">
-        <title>Listagem de Alunos</title>
+        <title>Lista de Alumnos</title>
     </head>
 
     <body>
         <div class="container">
             <header>
-                <h1>Universidade Equipe Orbitais</h1>
+                <h1>UNIVERSIDAD JUÁREZ</h1>
             </header>
             <main>
-                <h2>Lista de Alunos</h2>
+                <h2>Lista de Alumnos</h2>
                 <div>
                     <img id="icone_cadastro" class="icone_cadastro" src="imagens/plus_icon.png" alt="">
-                    <p>Cadastrar novo Aluno</p>
+                    <p>Registro de Alumno</p>
                     <table>
                         <thead>
                             <tr>
                                 <th>Matricula</th>
-                                <th>Nome</th>
-                                <th>Ano de Ingresso</th>
+                                <th>Nombre</th>
+                                <th>Año de Ingreso</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -36,7 +36,7 @@
             <script>
                 
                 //Variáveis globais
-                var ListaAlunos;
+                var ListaAlumnos;
                 var corpo_tabela = document.querySelector("table tbody");
                 var cadastrarAlunoBtn = document.querySelector("#icone_cadastro");
                 var editarBtn = [];
@@ -47,11 +47,11 @@
 
                 //Funções
                 function carregaTabela() {
-                    ListaAlunos = JSON.parse(localStorage.getItem("ListaAlunos"));
-                    if (!ListaAlunos){
-                        ListaAlunos = {Alunos:[]};
+                    ListaAlumnos = JSON.parse(localStorage.getItem("ListaAlumnos"));
+                    if (!ListaAlumnos){
+                        ListaAlumnos = {Alumnos:[]};
                     }
-                    ListaAlunos.Alunos.forEach(criar_linha_aluno);
+                    ListaAlumnos.Alumnos.forEach(criar_linha_aluno);
 
                 }
 
@@ -59,8 +59,8 @@
                     //criar elementos da linha do aluno
                     var linha = document.createElement("tr");
                     var campo_matricula = document.createElement("td");
-                    var campo_nome = document.createElement("td");
-                    var campo_ano = document.createElement("td");
+                    var campo_nombre = document.createElement("td");
+                    var campo_año = document.createElement("td");
                     var campo_acoes = document.createElement("td");
                     var img_editar = document.createElement("img");
                     var img_remover = document.createElement("img");
@@ -68,8 +68,8 @@
 
                     //Criar o conteúdo da linha criada
                     var text_matricula = e.matricula;
-                    var text_nome = e.nome;
-                    var text_ano = e.ano;
+                    var text_nombre = e.nombre;
+                    var text_año = e.año;
                     img_editar.setAttribute("src", "imagens/edit-icon.jpg");
                     img_remover.setAttribute("src", "imagens/trash_icon.png");
 
@@ -82,35 +82,35 @@
 
                     //Vincular o conteúdo aos elementos da linha criada
                     campo_matricula.innerHTML = text_matricula;
-                    campo_nome.innerHTML = text_nome;
-                    campo_ano.innerHTML = text_ano;
+                    campo_nombre.innerHTML = text_nombre;
+                    campo_año.innerHTML = text_año;
                     campo_acoes.appendChild(img_editar);
                     campo_acoes.appendChild(img_remover);
                             
                     linha.appendChild(campo_matricula);
-                    linha.appendChild(campo_nome);
-                    linha.appendChild(campo_ano);
+                    linha.appendChild(campo_nombre);
+                    linha.appendChild(campo_año);
                     linha.appendChild(campo_acoes);
                     
                     //Vincular os elementos da linha criada ao documento
                     corpo_tabela.appendChild(linha);               
                 }
 
-                function editarAluno(e) {
+                function editarAlumno(e) {
                     e.addEventListener("click", function(){
                         localStorage.setItem("idAcao", e.id);
                         window.location.assign("formulario.html");
                     });
                 }
 
-                function removerAluno(e) {
+                function removerAlumno(e) {
                     e.addEventListener("click", function(){
                         
-                        for (let i = 0; i < ListaAlunos.Alunos.length; i++) {
-                            if(ListaAlunos.Alunos[i].id == e.id){
-                                ListaAlunos.Alunos.splice(i, 1);
+                        for (let i = 0; i < ListaAlumnos.Alumnos.length; i++) {
+                            if(ListaAlumnos.Alumnos[i].id == e.id){
+                                ListaAlumnos.Alumnos.splice(i, 1);
                                 myJSON = JSON.stringify(ListaAlunos);
-                                localStorage.setItem("ListaAlunos", myJSON);
+                                localStorage.setItem("ListaAlumnos", myJSON);
                                 break;
                             } 
                         }
@@ -119,21 +119,21 @@
                     
                 }
 
-                function cadastrarAluno(event) {
-                    localStorage.setItem("idAcao", 0);
+                function registarAlumno(event) {
+                    localStorage.setItem("idRegistro", 0);
                     window.location.assign("formulario.html");
                 }
 
                 //Rotina principal
                 window.onload = carregaTabela();
-                cadastrarAlunoBtn.addEventListener("click", cadastrarAluno);
-                editarBtn.forEach(editarAluno);
-                removerBtn.forEach(removerAluno);
+                cadastrarAlunoBtn.addEventListener("click", registarAlumno);
+                editarBtn.forEach(editarAlumno);
+                removerBtn.forEach(removerAlumno);
 
             </script>
         </div>
          <footer>
-        <p align="center">só pra ganhar a camisa, depois você tira ksksksks</p>
+        <p align="center">Dhamar Citlaly Zapata Torres 212H17141</p>
         </footer>
     </body>
 </html>
